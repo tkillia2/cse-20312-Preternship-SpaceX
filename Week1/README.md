@@ -14,3 +14,10 @@ Goals For this Week:
 
 # UPDATE 2:
     File_In.py program created -- successfully read in SpaceXData.txt file, followed by the option to either cut or keep the first line with column titles, this is then followed by reading through each row and removing the percent symbol that follows the final element and then prints the newly seperated data to ensure it is done correctly 
+
+    TEST PUSH TO GITHUB -- done to ensure our own understanding as well as allowing other group members to view, edit, debug, or comment on the code
+
+# UPDATE #3
+    Data has been parsed successfully, thorough understanding of how the parsing works, and how elements are seperated has been shown through the use of variables and opertaions performed that represent possible uses for analyzing the data. Ultimately appearing that File_In.py may be near completeion if approved by group as a successful way to read in and parse the data
+
+# WILL COMMIT To GITHUB AS COMMIT #2
