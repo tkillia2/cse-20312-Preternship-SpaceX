@@ -21,3 +21,8 @@ Goals For this Week:
     Data has been parsed successfully, thorough understanding of how the parsing works, and how elements are seperated has been shown through the use of variables and opertaions performed that represent possible uses for analyzing the data. Ultimately appearing that File_In.py may be near completeion if approved by group as a successful way to read in and parse the data
 
 # WILL COMMIT To GITHUB AS COMMIT #2
+
+## UPDATE #4
+    Two new Files have been created in order to experiment and familiarize ourselves with dictionaries and how we plan to use them for this project. One of the files was committed and has a dictionary of totals for each company's respective columns provided to us from the Excel Sheet of Dummy Data. The other file takes in each company and creates a dictionary utilizing the company's name as the key (A,B,C,etc.) and then has the remaining variables that were totaled printed as seperate lists in order to see each shipment from each company.
+
+# Will be commited to GitHub prior to Code Review 4/23 @ 5:15 pm
