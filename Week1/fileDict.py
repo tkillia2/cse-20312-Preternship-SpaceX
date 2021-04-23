@@ -35,23 +35,25 @@ for key, value in dictData.items():
 
 
 print('')
-print('')
 
 print(dict(dictData))
 
 
+print('')
+print('')
 
-'''dictData = collections.defaultdict(dict)
+# Creating a dictionary where the keys are the vendors and the values are a list of all of their scores for each category for easy referencing
+dictAllData = collections.defaultdict(list)
 for row in csv_reader:
 	if row[5].endswith('%'):
 		row[5] = row[5].rstrip('%')
-	dictData[row[0]] = []
-	dictData[row[0]].append(row[1:])
+	# Append each list of data into the value of the given vendor
+	dictAllData[row[0]].append(row[1:])
 
-for key, value in dictData.items():
-	print(key, value)
-
-print(dictData)'''
+for key, value in dictAllData.items():
+	print(key)
+	for nums in value:
+		print(f'  {nums}')
 
 
 
