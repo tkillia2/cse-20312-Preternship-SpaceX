@@ -12,13 +12,13 @@ from collections import OrderedDict
 # Vendor is determined by the command line argument after flag for this function (tbd)
 # For example './funcs.py -flag "A"'
 
-def single_vendor(data, vendor)
+def single_vendor(data, vendor):
 
     csv_file    = open(data) # open the data file
     
     csv_file    = csv_file.readlines()[1:] # read in line by line
 
-    csv_reader  = csv.reader(csv_file, delimeter = ',') 
+    csv_reader  = csv.reader(csv_file, delimiter = ',') 
 
     vendor_dict = defaultdict(list) # create empty dictionary ready for lists
 
@@ -39,7 +39,7 @@ def single_vendor(data, vendor)
 # filled with the data from all vendors
 # return dictionary of vendors
 
-def all_vendors(data, vendor)
+def all_vendors(data, vendor):
 
     csv_file    = open(data) # open the data file
     
@@ -63,7 +63,7 @@ def all_vendors(data, vendor)
 # Created seperate in order to allow for either a single vendor to be printed or for all to be printed 
 # Function arguments: vendor_dict(dictionary created by above functions)
 # function return value: none, prints to terminal
-def print_vendor_data(vendor_dict)
+def print_vendor_data(vendor_dict):
     
     for key, value in vendor_dict.items():
 
