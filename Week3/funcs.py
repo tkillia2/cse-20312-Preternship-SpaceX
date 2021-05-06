@@ -39,13 +39,13 @@ def single_vendor(data, vendor):
 # filled with the data from all vendors
 # return dictionary of vendors
 
-def all_vendors(data, vendor):
+def all_vendors(data):
 
     csv_file    = open(data) # open the data file
     
     csv_file    = csv_file.readlines()[1:] # read in line by line
 
-    csv_reader  = csv.reader(csv_file, delimeter = ',') 
+    csv_reader  = csv.reader(csv_file, delimiter = ',') 
 
     vendor_dict = defaultdict(list) # create empty dictionary ready for lists
 
@@ -54,7 +54,9 @@ def all_vendors(data, vendor):
     for row in csv_reader:
         key   = row[0]
         value = row[1:]
-
+    
+        vendor_dict[key].append(row[1:])
+    
     return  vendor_dict
 
 # print_vendor_data
@@ -67,7 +69,7 @@ def print_vendor_data(vendor_dict):
     
     for key, value in vendor_dict.items():
 
-        print('\n---------------VENDOR INFO---------------\n')
+        print(f'\n---------------VENDOR {key} INFO---------------\n')
         print('KEY: {}'.format(key))
 
         for item in value:
