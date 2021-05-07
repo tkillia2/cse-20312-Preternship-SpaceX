@@ -8,6 +8,7 @@ from collections import OrderedDict
 from funcs import raw_vendor # import from funcs.py  
 from funcs import print_vendor_data # import from funcs.py
 from funcs import category_totals
+from funcs import grade_vendors
 
 def usage(status):
     ''' Display usage message and exit with status. '''
@@ -38,7 +39,10 @@ def main():
         elif argument == '-t':
             argument = arguments.pop(0)
             category_totals(argument)
-        #elif argument == '-g':
+        elif argument == '-g':
+            argument = arguments.pop(0)
+            vendor = arguments.pop(0)
+            grade_vendors(argument, vendor)
         #elif argument == '-h':
             #usage(0) 
 
