@@ -50,10 +50,10 @@ for value in company_dict.items():			# Iterates through each company, resetting 
 
 
 sheet1.write(0, 0, 'COMPANY')
-sheet1.write(1, 0, 'QUALITY')
-sheet1.write(2, 0, 'COST')
-sheet1.write(3, 0, 'DELIVERY')
-sheet1.write(4, 0, 'SCORE')
+sheet1.write(0, 1, 'QUALITY')
+sheet1.write(0, 2, 'COST')
+sheet1.write(0, 3, 'DELIVERY')
+sheet1.write(0, 4, 'SCORE')
 
 GPA = []
 
@@ -80,11 +80,11 @@ for value in company_dict.items():			# Iterates through each company, resetting 
     Gpa_test = Gpa_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
 
   #  outFile.write(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {Gpa_test:8.4}\n")
-    sheet1.write(0, row, value[0]) 
-    sheet1.write(1, row, (1-(total_quality/count))*100)
-    sheet1.write(2, row, costScore*10)
-    sheet1.write(3, row, delivScore*10)
-    sheet1.write(4, row, Gpa_test)
+    sheet1.write(row, 0, value[0]) 
+    sheet1.write(row, 1, (1-(total_quality/count))*100)
+    sheet1.write(row, 2, costScore*10)
+    sheet1.write(row, 3, delivScore*10)
+    sheet1.write(row, 4, Gpa_test)
 
     row += 1
 
@@ -101,9 +101,9 @@ for element in GPA:
 grade_dict = sorted(grade_dict.items(), key = lambda x: x[1], reverse = True)
 iter = 0
 row = 14
-sheet1.write(0, 13, 'VENDOR') 
-sheet1.write(1, 13, 'SCORE') 
-sheet1.write(2, 13, 'DECISION')
+sheet1.write(13, 0, 'VENDOR') 
+sheet1.write(13, 1, 'SCORE') 
+sheet1.write(13, 2, 'DECISION')
  
 for value in grade_dict:
     status = "GROW"
@@ -117,9 +117,9 @@ for value in grade_dict:
     
  #   print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA:8.4}   -> {decision:10}")
   #  print("                                                |")			    # Prints averages of each category for current company with formatting
-    sheet1.write(0, row, grade_dict[iter][0]) 
-    sheet1.write(1, row, grade_dict[iter][1]) 
-    sheet1.write(2, row, status) 
+    sheet1.write(row, 0, grade_dict[iter][0]) 
+    sheet1.write(row, 1, grade_dict[iter][1]) 
+    sheet1.write(row, 2, status) 
    # outFile.write(f"Vendor: {grade_dict[iter][0]}    Score: {grade_dict[iter][1]:.4}    Decision: {status}\n\n")
     iter += 1
     row += 1
@@ -128,6 +128,6 @@ for value in grade_dict:
 # outFile.write("However, in order to provide the best results we have decided that vendor F has too little information compared to the others.\n")
  #outFile.write("Therefore we have expanded the grow category to four vendors, with this footnote for F.\n")
 
-sheet1.write(0, 28, '**Due to limited information from Vendor F, they will receive GROW status.  However, in order to provide the best results we have decided that vendor F has too little information compared to the others.  Therefore we have expanded the grow category to four vendors, with this footnote for F."')
+sheet1.write(28, 0, '**Due to limited information from Vendor F, they will receive GROW status.  However, in order to provide the best results we have decided that vendor F has too little information compared to the others.  Therefore we have expanded the grow category to four vendors, with this footnote for F."')
 
 wb.save('DataOutput.xls')
