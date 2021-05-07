@@ -38,6 +38,7 @@ def raw_vendor(data, choice):
     return  vendor_dict
 
 
+
 # print_vendor_data
 # Function executes the last portion of Dictionary.py
 # Format is that of header, then vendor, then raw data values 
@@ -56,6 +57,7 @@ def print_vendor_data(vendor_dict):
         print('\n')
 
 
+
 # category_totals
 # Function executes the creation of dictionary seen in fileDict.py
 # The purpose is to read in the data and total each category for each vendor
@@ -66,7 +68,8 @@ def print_vendor_data(vendor_dict):
 # Single vendor example './main.py -t SpaceXData A'
 # All vendor example './main.py -t SpaceXData All'
 
-def category_totals(data, choice):
+def category_totals(data):
+
     csv_file    = open(data)
     csv_file    = csv_file.readlines()[1:]
     vendor_dict = defaultdict(dict)
@@ -82,8 +85,4 @@ def category_totals(data, choice):
         vendor_dict[vendor]['cost']        = vendor_dict[vendor].get('cost', 0) + int(cost)
 
     for key, value in vendor_dict.items():
-        if(choice != 'All'):
-            if(vendor_dict[vendor] == choice):
-                print(key, value)
-        else:
-            print(key, value)
+        print(key, value)

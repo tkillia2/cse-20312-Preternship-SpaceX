@@ -21,8 +21,7 @@ def main():
             print_vendor_data(vendor_dict) # print data
         elif argument == '-t':
             argument = arguments.pop(0)
-            vendor = arguments.pop(0)
-            category_totals(argument, vendor)
+            category_totals(argument)
              
 if __name__ == '__main__':
     main()
