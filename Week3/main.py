@@ -4,9 +4,9 @@ import csv
 import sys
 from collections import defaultdict
 from collections import OrderedDict
-from funcs import single_vendor # import from funcs.py  
+from funcs import raw_vendor # import from funcs.py  
 from funcs import print_vendor_data # import from funcs.py
-from funcs import all_vendors # import from funcs.py 
+from funcs import category_totals
 
 def main():
     arguments = sys.argv[1:] # store command line arguments not inluding file name
@@ -14,15 +14,15 @@ def main():
     while arguments:
         # take first command line argument
         argument = arguments.pop(0)
-        if argument == '-s': # single vendor flag
+        if argument == '-r': # raw vendor flag (one or all)
             argument = arguments.pop(0) # pop again to get data file
             vendor = arguments.pop(0) # since we need the vendor as well we pop again to get next argument as vendor
-            vendor_dict = single_vendor(argument, vendor) # create dictionary for specified vendor raw data
+            vendor_dict = raw_vendor(argument, vendor) # create dictionary for specified vendor raw data
             print_vendor_data(vendor_dict) # print data
-        if argument == '-a':
-            argument = arguments.pop(0) # get data file
-            vendor_dict = all_vendors(argument) # create dictionary for all vendor raw data
-            print_vendor_data(vendor_dict) # print dictionary
-    
+        elif argument == '-t':
+            argument = arguments.pop(0)
+            vendor = arguments.pop(0)
+            category_totals(argument, vendor)
+             
 if __name__ == '__main__':
     main()
