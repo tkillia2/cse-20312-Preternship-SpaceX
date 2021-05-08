@@ -29,8 +29,8 @@ def raw_vendor(data, choice):
         key   = row[0]
         value = row[1:]
 
-        if (choice != 'All'):
-             if(key == choice):
+        if choice != 'All':
+             if key == choice:
                 vendor_dict[key].append(row[1:])
         else:
             vendor_dict[key].append(row[1:])
@@ -86,3 +86,35 @@ def category_totals(data):
 
     for key, value in vendor_dict.items():
         print(key, value)
+
+def grade_vendors(data, choice):
+    csv_file    = open(data)
+    csv_file    = csv_file.readlines()[1:]
+    csv_reader  = csv.reader(csv_file, delimiter = ',')
+    vendor_dict = defaultdict(list)
+    List = []
+
+    for row in csv_reader:
+        key    = row[0]
+        row[5] = row[5].rstrip('%')
+        value  = row[1:]
+
+        if choice != 'All':    
+            if key == choice:
+                vendor_dict[key].append(row[1:])
+        else:
+            vendor_dict[key].append(row[1:])
+
+    for value in vendor_dict.items():
+        total_delivery = 0
+        total_cost     = 0
+        total_quality  = 0 
+        count          = 0
+
+        for List in value[1]:
+            total_delivery += int(List[0])
+            total_cost     += int(List[4])
+            total_quality  += (int(List[2]) + int(List[3])) / int(List[1])
+            count          += 1
+    
+        print(f'     {value[0]} {(1-(total_quality/count))*100:14.4}% {total_cost/count:9.4}% {total_delivery/count:11.4}\n')
