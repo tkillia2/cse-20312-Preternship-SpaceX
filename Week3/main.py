@@ -51,7 +51,7 @@ def main():
         elif argument == '-s': # score and decision data flag
             argument = arguments.pop(0) # pop again to get data file
             score_vendors(argument)
-        elif argument == '-o':
+        elif argument == '-o': # table outfile flag
             argument = arguments.pop(0)
             grade_to_Out(argument)
         elif argument == '-h':

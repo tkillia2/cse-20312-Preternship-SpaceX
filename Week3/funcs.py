@@ -156,7 +156,8 @@ def vendor_grades(data):
         total_cost = 0
         total_quality = 0
         count = 0
-        GPA = 4.00
+        GPA_start = 4.00
+        GPA_test = 4.00
         decision = 'GROW'
 
         for List in value[1]:
@@ -169,15 +170,37 @@ def vendor_grades(data):
         costScore = total_cost/count * 0.1
         delivScore = total_delivery/count * 0.1
 
-        GPA = GPA - 0.04*qualScore - 0.03*costScore - 0.03*delivScore
+        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
 
-        if GPA < 3.55 and GPA > 3.45:
-            decision = 'MAINTAIN'
-        elif GPA <= 3.45:
-            decision = 'EXIT'
+      #  if GPA < 3.55 and GPA > 3.45:
+         #   decision = 'MAINTAIN'
+       # elif GPA <= 3.45:
+           # decision = 'EXIT'
 
-        print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA:8.4}   -> {decision:10}")
+    grade_dict = {}
+    ascii = 65
+    for element in GPA:
+        key = chr(ascii)
+        grade_dict[key] = element
+        ascii += 1
+
+    grade_dict = sorted(grade_dict.items(), key = lambda x: x[1], reverse = True)
+    GPA = sorted(GPA, reverse = True)
+
+    iter = 0
+    for value in grade_dict:
+        decision = "GROW"
+        key = grade_dict[iter][0]
+        if iter < 7 and iter > 3:
+            decision = "MAINTAIN"
+        elif iter > 6:
+            decision = "EXIT"
+        if key == 'F':
+            decision += '**'
+        print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA[iter]:8.4}   -> {decision:10}")
         print("                                                |")
+        iter += 1
 
 
 # score_vendors
@@ -219,8 +242,8 @@ def score_vendors(data):
         total_cost = 0
         total_quality = 0
         count = 0
-        GPA_start = 4.00
         Gpa_test = 4.00
+        Gpa_start = 4.00
         decision = "GROW"
 
         for list0 in value[1]:
@@ -234,7 +257,7 @@ def score_vendors(data):
         delivScore = total_delivery/count * 0.1
         Gpa_test = Gpa_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
 
-        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
+        GPA.append(Gpa_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
 
     grade_dict = {}
     ascii = 65
@@ -263,6 +286,13 @@ def score_vendors(data):
         print("**Due to limited information from Vendor F, they will receive GROW status.\n")
         print("However, in order to provide the best results we have decided that vendor F has too little information compared to the others.\n")
         print("Therefore we have expanded the grow category to four vendors, with this footnote for F.\n")
+
+
+# grade_to_Out
+# Function creates grading and scoring table 
+# Creates text file that will be written to with the tables created
+# Flag -o
+# Example './main.py -o SpaceXData
 
 def grade_to_Out(data):
     csv_file = open('SpaceXData.txt')
