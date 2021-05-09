@@ -90,12 +90,11 @@ def category_totals(data):
 # vendor_averages
 # Function executes the display of data averages for each category seen in calcOrder.py
 # The purpose is to print out an average value for delivery, cost, and quality per company
-# Can specify a single vendor or all
-# Flag is -g
-# Single vendor example './main.py -g SpaceXData A'
-# All vendor example './main.py -g SpaceXData All'
+# Only prints the first table
+# Flag is -a (no need to specify vendor
+# Example run './main.py -a SpaceXData'
 
-def vendor_averages(data, choice):
+def vendor_averages(data):
 
     csv_file    = open(data)
     csv_file    = csv_file.readlines()[1:]
@@ -107,14 +106,11 @@ def vendor_averages(data, choice):
         key    = row[0]
         row[5] = row[5].rstrip('%')
         value  = row[1:]
+            
+        vendor_dict[key].append(row[1:])
 
-        if choice != 'All':
-            if key == choice:
-                vendor_dict[key].append(row[1:])
-        else:
-            vendor_dict[key].append(row[1:])
-
-    print('---VENDOR------QUALITY------COST------DELIVERY----')
+        
+    print('\n---VENDOR------QUALITY------COST------DELIVERY----')
     for value in vendor_dict.items():
         total_delivery = 0
         total_cost     = 0
@@ -129,11 +125,66 @@ def vendor_averages(data, choice):
         print(f'     {value[0]} {(1-(total_quality/count))*100:14.4}% {total_cost/count:9.4}% {total_delivery/count:11.4}\n')
 
 
+# vendor_grades
+# Function executes the display of data averages for each category seen in calcOrder.py
+# The purpose is to print out an average value for delivery, cost, and quality per company as well as the score and decision
+# Only prints the second table
+# Flag is -g (no need to specify vendor)
+# Example run './main.py -g SpaceXData'
+
+def vendor_grades(data):
+
+    csv_file    = open(data)
+    csv_file    = csv_file.readlines()[1:]
+    csv_reader  = csv.reader(csv_file, delimiter = ',')
+    vendor_dict = defaultdict(list)
+    List = []
+
+    for row in csv_reader:
+        key    = row[0]
+        row[5] = row[5].rstrip('%')
+        value  = row[1:]
+            
+        vendor_dict[key].append(row[1:])
+
+    print("\n--COMPANY-----QUALITY------COST------DELIVERY------SCORE------DECISION--\n")
+
+    GPA = []
+
+    for value in vendor_dict.items():
+        total_delivery = 0
+        total_cost = 0
+        total_quality = 0
+        count = 0
+        GPA = 4.00
+        decision = 'GROW'
+
+        for List in value[1]:
+            total_delivery += int(List[0])
+            total_cost += int(List[4])
+            total_quality += (int(List[2]) + int(List[3])) / int(List[1])
+            count += 1
+
+        qualScore = total_quality/count * 100
+        costScore = total_cost/count * 0.1
+        delivScore = total_delivery/count * 0.1
+
+        GPA = GPA - 0.04*qualScore - 0.03*costScore - 0.03*delivScore
+
+        if GPA < 3.55 and GPA > 3.45:
+            decision = 'MAINTAIN'
+        elif GPA <= 3.45:
+            decision = 'EXIT'
+
+        print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA:8.4}   -> {decision:10}")
+        print("                                                |")
+
+
 # score_vendors
 # Function calculates the overall score for each company as seen in calcOrder2.py
-# The purpose is to print out each company's score and decision
-# Flag is -s
-# Example './main.py -s SpaceXData'
+# The purpose is to print out each company's score and decision in a row by row format
+# flag is -s 
+# Example run './main.py -s SpaceXData'
 
 def score_vendors(data):
     csv_file    = open(data)
@@ -147,10 +198,6 @@ def score_vendors(data):
         row[5] = row[5].rstrip('%')
         value  = row[1:]
 
-        #if choice != 'All':
-        #    if key == choice:
-        #        vendor_dict[key].append(row[1:])
-        #else:
         vendor_dict[key].append(row[1:])
 
     for value in vendor_dict.items():
@@ -164,7 +211,7 @@ def score_vendors(data):
             total_cost     += int(List[4])
             total_quality  += (int(List[2]) + int(List[3])) / int(List[1])
             count          += 1
-
+        
     GPA = []
 
     for value in vendor_dict.items():
@@ -209,7 +256,7 @@ def score_vendors(data):
         if key == 'F':
             status += '**'
             vendor_f = True;
-
+        
         print(f"Vendor: {grade_dict[iter][0]}    Score: {grade_dict[iter][1]:.4}    Decision: {status}\n\n")
         iter += 1
     if (vendor_f) :
