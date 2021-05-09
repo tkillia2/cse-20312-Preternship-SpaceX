@@ -11,7 +11,7 @@ from funcs import category_totals
 from funcs import vendor_averages
 from funcs import score_vendors
 from funcs import vendor_grades 
-
+from funcs import grade_to_Out
 
 def usage(status):
     ''' Display usage message and exit with status. '''
@@ -39,10 +39,10 @@ def main():
             vendor = arguments.pop(0) # since we need the vendor as well we pop again to get next argument as vendor
             vendor_dict = raw_vendor(argument, vendor) # create dictionary for specified vendor raw data
             print_vendor_data(vendor_dict) # print data
-        elif argument == '-t':
+        elif argument == '-t': #category totals flag
             argument = arguments.pop(0)
             category_totals(argument)
-        elif argument == '-a': # grades data flag
+        elif argument == '-a': # averages data flag
             argument = arguments.pop(0) # pop again to get data file
             vendor_averages(argument)
         elif argument == '-g': # grades data flag
@@ -51,6 +51,9 @@ def main():
         elif argument == '-s': # score and decision data flag
             argument = arguments.pop(0) # pop again to get data file
             score_vendors(argument)
+        elif argument == '-o':
+            argument = arguments.pop(0)
+            grade_to_Out(argument)
         elif argument == '-h':
             usage(0)
 

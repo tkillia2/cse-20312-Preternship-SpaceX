@@ -263,3 +263,79 @@ def score_vendors(data):
         print("**Due to limited information from Vendor F, they will receive GROW status.\n")
         print("However, in order to provide the best results we have decided that vendor F has too little information compared to the others.\n")
         print("Therefore we have expanded the grow category to four vendors, with this footnote for F.\n")
+
+def grade_to_Out(data):
+    csv_file = open('SpaceXData.txt')
+    
+    outFile = open('Outfile.txt', 'w')
+    
+    csv_file = csv_file.readlines()[1:]
+
+    csv_reader = csv.reader(csv_file, delimiter = ',')
+
+    vendor_dict = defaultdict(list)
+
+    for row in csv_reader:
+        key    = row[0]
+        row[5] = row[5].rstrip('%')
+        value  = row[1:]
+
+        vendor_dict[key].append(row[1:])
+
+    outFile.write("\n--COMPANY-----QUALITY------COST------DELIVERY------SCORE--\n\n")
+
+    GPA = []
+
+    for value in vendor_dict.items():
+        total_delivery  = 0
+        total_cost      = 0
+        total_quality   = 0
+        count           = 0
+        GPA_start       = 4.00
+        GPA_test        = 4.00
+        decision        = 'GROW' 
+    
+        for List in value[1]:
+            total_delivery += int(List[0])
+            total_cost += int(List[4])
+            total_quality += (int(List[2]) + int(List[3])) / int(List[1])
+            count += 1
+
+        qualScore = total_quality/count * 100
+        costScore = total_cost/count * 0.1
+        delivScore = total_delivery/count * 0.1
+        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+
+        outFile.write(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA_test:8.4}\n")
+        outFile.write("                                                |\n")
+        outFile.write('\n')
+
+        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
+
+    grade_dict = {}
+    ascii = 65
+    
+    for element in GPA:
+        key = chr(ascii)
+        grade_dict[key] = element
+        ascii += 1
+
+    grade_dict = sorted(grade_dict.items(), key = lambda x: x[1], reverse = True)
+    iter = 0
+
+    for value in grade_dict:
+        status = "GROW"
+        key = grade_dict[iter][0]
+        if iter < 7 and iter > 3:
+            status = "MAINTAIN"
+        elif iter > 6:
+            status = "EXIT"
+        if key == 'F':
+            status += '**'
+
+        outFile.write(f"Vendor: {grade_dict[iter][0]}    Score: {grade_dict[iter][1]:.4}    Decision: {status}\n\n")
+        iter += 1
+
+    outFile.write("**Due to limited information from Vendor F, they will receive GROW status.\n")
+    outFile.write("However, in order to provide the best results we have decided that vendor F has too little information compared to the others.\n")
+    outFile.write("Therefore we have expanded the grow category to four vendors, with this footnote for F.\n")
