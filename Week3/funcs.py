@@ -173,6 +173,7 @@ def vendor_grades(data):
         GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
         GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
 
+
       #  if GPA < 3.55 and GPA > 3.45:
          #   decision = 'MAINTAIN'
        # elif GPA <= 3.45:
@@ -279,6 +280,9 @@ def score_vendors(data):
         if key == 'F':
             status += '**'
             vendor_f = True;
+
+        if iter == 0:
+            print()
         
         print(f"Vendor: {grade_dict[iter][0]}    Score: {grade_dict[iter][1]:.4}    Decision: {status}\n\n")
         iter += 1
