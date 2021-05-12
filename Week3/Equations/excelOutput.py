@@ -77,7 +77,7 @@ for value in company_dict.items():			# Iterates through each company, resetting 
     qualScore = total_quality/count * 100
     costScore = total_cost/count * 0.1
     delivScore = total_delivery/count * 0.1
-    Gpa_test = Gpa_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+    Gpa_test = Gpa_test - 0.12*qualScore - 0.04*costScore - 0.15*delivScore
 
   #  outFile.write(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {Gpa_test:8.4}\n")
     sheet1.write(row, 0, value[0]) 
@@ -89,7 +89,7 @@ for value in company_dict.items():			# Iterates through each company, resetting 
     row += 1
 
 
-    GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore) # Calculating GPA using formula
+    GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.15*delivScore) # Calculating GPA using formula
 
 grade_dict = {}
 ascii = 65
