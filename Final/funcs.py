@@ -156,9 +156,7 @@ def vendor_grades(data):
         total_cost = 0
         total_quality = 0
         count = 0
-        GPA_start = 4.00
         GPA_test = 4.00
-        decision = 'GROW'
 
         for List in value[1]:
             total_delivery += int(List[0])
@@ -170,42 +168,9 @@ def vendor_grades(data):
         costScore = total_cost/count * 0.1
         delivScore = total_delivery/count * 0.1
 
-        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.15*delivScore
         print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA_test:8.4}\n")
         
-        '''
-        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
-
-
-      #  if GPA < 3.55 and GPA > 3.45:
-         #   decision = 'MAINTAIN'
-       # elif GPA <= 3.45:
-           # decision = 'EXIT'
-
-    grade_dict = {}
-    ascii = 65
-    for element in GPA:
-        key = chr(ascii)
-        grade_dict[key] = element
-        ascii += 1
-
-    grade_dict = sorted(grade_dict.items(), key = lambda x: x[1], reverse = True)
-    GPA = sorted(GPA, reverse = True)
-
-    iter = 0
-    for value in grade_dict:
-        decision = "GROW"
-        key = grade_dict[iter][0]
-        if iter < 7 and iter > 3:
-            decision = "MAINTAIN"
-        elif iter > 6:
-            decision = "EXIT"
-        if key == 'F':
-            decision += '**'
-        print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA[iter]:8.4}   -> {decision:10}")
-        print("                                                |")
-        iter += 1
-'''
 
 # score_vendors
 # Function calculates the overall score for each company as seen in calcOrder2.py
@@ -246,9 +211,7 @@ def score_vendors(data):
         total_cost = 0
         total_quality = 0
         count = 0
-        Gpa_test = 4.00
         Gpa_start = 4.00
-        decision = "GROW"
 
         for list0 in value[1]:
             total_delivery += int(list0[0])
@@ -259,9 +222,8 @@ def score_vendors(data):
         qualScore = total_quality/count * 100
         costScore = total_cost/count * 0.1
         delivScore = total_delivery/count * 0.1
-        Gpa_test = Gpa_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
 
-        GPA.append(Gpa_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
+        GPA.append(Gpa_start - 0.12*qualScore - 0.04*costScore - 0.15*delivScore)
 
     grade_dict = {}
     ascii = 65
@@ -330,7 +292,6 @@ def grade_to_Out(data):
         count           = 0
         GPA_start       = 4.00
         GPA_test        = 4.00
-        decision        = 'GROW' 
     
         for List in value[1]:
             total_delivery += int(List[0])
@@ -341,13 +302,13 @@ def grade_to_Out(data):
         qualScore = total_quality/count * 100
         costScore = total_cost/count * 0.1
         delivScore = total_delivery/count * 0.1
-        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+        GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.15*delivScore
 
         outFile.write(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA_test:8.4}\n")
         outFile.write("                                                |\n")
         outFile.write('\n')
 
-        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
+        GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.15*delivScore)
 
     grade_dict = {}
     ascii = 65
