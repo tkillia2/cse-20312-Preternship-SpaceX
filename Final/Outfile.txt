@@ -1,0 +1,56 @@
+
+--COMPANY-----QUALITY------COST------DELIVERY------SCORE--
+
+     A          90.35%     44.43%       14.93   |    2.545
+                                                |
+
+     B          95.23%     41.04%       12.91   |     3.16
+                                                |
+
+     C          93.64%     51.93%       14.01   |    2.918
+                                                |
+
+     D          93.76%     49.27%       14.04   |    2.942
+                                                |
+
+     E          83.91%     47.94%       12.11   |     1.78
+                                                |
+
+     F          97.15%      20.0%         7.0   |    3.522
+                                                |
+
+     G          93.41%     49.79%       12.92   |    2.907
+                                                |
+
+     H          93.16%     51.74%       15.23   |    2.851
+                                                |
+
+     I          92.52%      54.0%       14.35   |    2.772
+                                                |
+
+     J          91.76%     50.74%       12.95   |    2.705
+                                                |
+
+Vendor: F    Score: 3.522    Decision: GROW**
+
+Vendor: B    Score: 3.16    Decision: GROW
+
+Vendor: D    Score: 2.942    Decision: GROW
+
+Vendor: C    Score: 2.918    Decision: GROW
+
+Vendor: G    Score: 2.907    Decision: MAINTAIN
+
+Vendor: H    Score: 2.851    Decision: MAINTAIN
+
+Vendor: I    Score: 2.772    Decision: MAINTAIN
+
+Vendor: J    Score: 2.705    Decision: EXIT
+
+Vendor: A    Score: 2.545    Decision: EXIT
+
+Vendor: E    Score: 1.78    Decision: EXIT
+
+**Due to limited information from Vendor F, they will receive GROW status.
+However, in order to provide the best results we have decided that vendor F has too little information compared to the others.
+Therefore we have expanded the grow category to four vendors, with this footnote for F.
