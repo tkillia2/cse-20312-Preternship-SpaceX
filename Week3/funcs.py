@@ -147,7 +147,7 @@ def vendor_grades(data):
             
         vendor_dict[key].append(row[1:])
 
-    print("\n--COMPANY-----QUALITY------COST------DELIVERY------SCORE------DECISION--\n")
+    print("\n--COMPANY-----QUALITY------COST------DELIVERY------SCORE--\n")
 
     GPA = []
 
@@ -171,6 +171,9 @@ def vendor_grades(data):
         delivScore = total_delivery/count * 0.1
 
         GPA_test = GPA_test - 0.12*qualScore - 0.04*costScore - 0.08*delivScore
+        print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA_test:8.4}\n")
+        
+        '''
         GPA.append(GPA_start - 0.12*qualScore - 0.04*costScore - 0.08*delivScore)
 
 
@@ -202,7 +205,7 @@ def vendor_grades(data):
         print(f"     {value[0]} {(1-(total_quality/count))*100:14.4}% {costScore*10:9.4}% {delivScore*10:11.4}   | {GPA[iter]:8.4}   -> {decision:10}")
         print("                                                |")
         iter += 1
-
+'''
 
 # score_vendors
 # Function calculates the overall score for each company as seen in calcOrder2.py
